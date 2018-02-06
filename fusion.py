@@ -5,7 +5,8 @@ import os
 import time
 
 FUSION7PATH = r"T:\DEV\cgru\cgru_windows\software_setup\start_fusion.cmd"
-RENDERNODEPATH= r"T:\DEV\fusion\DEV\Deployments\Fusion Render Node\FusionRenderNode.exe"
+
+RENDERNODEPATH= r"T:\DEV\fusion\DEV\Deployments\freshFusion\Fusion Render Node\FusionRenderNode.exe"
 
 class Task(object):
     def __init__(self,appname):
