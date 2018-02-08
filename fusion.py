@@ -4,14 +4,15 @@ import subprocess
 import os
 import time
 
-FUSION7PATH = r"T:\DEV\cgru\cgru_windows\software_setup\start_fusion.cmd"
 
-RENDERNODEPATH= r"T:\DEV\fusion\DEV\Deployments\freshFusion\Fusion Render Node\FusionRenderNode.exe"
+FUSION7PATH = r"T:\DEV\cgru\cgru_windows\software_setup\start_fusion.cmd"
+RENDERNODEPATH= r"T:\DEV\fusion\DEV\Deployments\freshFusion\rendernode\FusionRenderNode.exe"
 
 class Task(object):
-    def __init__(self,appname):
+    def __init__(self):
+        self.color()
         self.pid = None
-        self.__appname = appname
+        self.__appname = "FusionRenderNode.exe"
         self.sp= None
 
     def __List(self):
@@ -41,15 +42,18 @@ class Task(object):
         if(appname == "FUSION7"):
             return subprocess.Popen([FUSION7PATH])
         if(appname =="RENDERNODE"):
-            return subprocess.Popen(RENDERNODEPATH,shell=True)
+            return subprocess.Popen("start /AFFINITY 0xFFA "+RENDERNODEPATH,stdout=subprocess.PIPE,shell=True) #10 Core
 
-    def Title(self,title):
+
+    def title(self,title):
         return subprocess.Popen("title "+title,shell=True)
+    def color(self):
+        return subprocess.Popen("color A",shell=True)
 
-task1 = Task("FusionRenderNode.exe")
-task1.Title("Fresh Fusion is being started... Let's Party")
+task1 = Task()
+task1.title("Fresh Fusion is being started... Let's Party")
 task1.Kill()
 task1.run("FUSION7")
 time.sleep(15)
 task1.run("RENDERNODE")
-task1.Title("Fresh Fusion was started. Did you enjoy it? yeeee")
+task1.title("Fresh Fusion was started.")
